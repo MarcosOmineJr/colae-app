@@ -1,5 +1,10 @@
+import styles from './styles';
+
 import Button from './Button';
+import Card from './Card';
 
 export default {
-    Button
+    styles,
+    Button,
+    Card
 };

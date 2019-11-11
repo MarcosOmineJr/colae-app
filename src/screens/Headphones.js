@@ -13,7 +13,7 @@ import {
 
 import Svg, { Defs, RadialGradient, Stop, Rect } from 'react-native-svg';
 
-import ColaeAPI from './src/api';
+import ColaeAPI from '../api';
 
 const {width, height} = Dimensions.get('window');
 
