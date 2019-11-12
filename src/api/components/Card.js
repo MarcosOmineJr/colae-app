@@ -19,6 +19,8 @@ export default class Card extends React.Component {
         this._getTheme = this._getTheme.bind(this);
     }
 
+    _componentWidth = ((width*0.1027)*this.props.colSpan)+((width*0.055)*(this.props.colSpan-1));
+
     componentDidMount(){
         this._getTheme();
     }
@@ -32,13 +34,13 @@ export default class Card extends React.Component {
     render(){
         if(!this.props.header){
             return (
-                <View style={[styles.container, !this.props.noShadow?{...shadow }:{}, { width: ((width*0.1027)*this.props.colSpan)+((width*0.055)*(this.props.colSpan-1)) }, { alignItems: 'center', justifyContent: 'center'} ,this.props.contentContainerStyle]}>
+                <View style={[styles.container, !this.props.noShadow?{...shadow }:{}, { width: this._componentWidth, backgroundColor: this.state.theme.background }, styles.headerCard, this.props.contentContainerStyle]}>
                     {this.props.children}
                 </View>
             );
         } else {
             return (
-                <View style={[styles.container, !this.props.noShadow?{...shadow }:{}, { width: ((width*0.1027)*this.props.colSpan)+((width*0.055)*(this.props.colSpan-1)) }, { paddingHorizontal: '0.95%', paddingTop: '1%', alignItems: 'center', justifyContent: 'center'}, this.props.contentContainerStyle]}>
+                <View style={[styles.container, !this.props.noShadow?{...shadow }:{}, { width: this._componentWidth, backgroundColor: this.state.theme.background }, styles.noHeaderCard, this.props.contentContainerStyle]}>
                     <View style={styles.generalContainer}>
                         <View style={[styles.headerStyle, { backgroundColor: this.state.theme.main }, this.props.headerContainerStyle]}>
                             <Text style={[styles.headerTextStyle, this.props.headerTextStyle]}>
@@ -63,7 +65,9 @@ Card.defaultProps = {
 const styles = StyleSheet.create({
     container:{
         borderRadius: 5,
-        padding: width * 0.0694
+        padding: width * 0.0694,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     generalContainer:{
         width: '100%',
@@ -87,5 +91,11 @@ const styles = StyleSheet.create({
     },
     bodyContainerStyle:{
         padding: width * 0.0694
+    },
+
+    //particular Styles:
+    headerCard:{},
+    noHeaderCard:{
+        padding: 0
     }
 });

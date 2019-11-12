@@ -9,7 +9,7 @@ import {
 
 import Colae, { shadow } from './styles';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('screen');
 
 export default class Button extends React.Component {
 
@@ -20,6 +20,9 @@ export default class Button extends React.Component {
         }
         this._getTheme = this._getTheme.bind(this);
     }
+
+    _componentHeight = height*0.047;
+    _componentWidth = ((width*0.1027)*this.props.colSpan)+((width*0.055)*(this.props.colSpan-1));
 
     componentDidMount(){
         this._getTheme();
@@ -36,7 +39,7 @@ export default class Button extends React.Component {
             if(!this.props.secondary){
                 return (
                     <TouchableOpacity
-                    style={[styles.container, { width: ((width*0.1027)*this.props.colSpan)+((width*0.055)*(this.props.colSpan-1)) },this.props.blue?{ backgroundColor: this.state.theme.accent}:{ backgroundColor: this.state.theme.main}, shadow]}
+                    style={[styles.container, { height: this._componentHeight, width: this._componentWidth },this.props.blue?{ backgroundColor: this.state.theme.accent}:{ backgroundColor: this.state.theme.main}, shadow, this.props.contentContainerStyle]}
                     onPress={this.props.onPress}>
                         <Text style={styles.label}>{this.props.label.toUpperCase()}</Text>
                     </TouchableOpacity>
@@ -44,7 +47,7 @@ export default class Button extends React.Component {
             } else {
                 return (
                     <TouchableOpacity
-                    style={[styles.container, { width: ((width*0.1027)*this.props.colSpan)+((width*0.055)*(this.props.colSpan-1)) },this.props.blue?{ borderWidth:1, borderColor: this.state.theme.accent}:{ borderWidth:1, borderColor: this.state.theme.main}]}
+                    style={[styles.container, { height: this._componentHeight, width: this._componentWidth },this.props.blue?{ borderWidth:1, borderColor: this.state.theme.accent}:{ borderWidth:1, borderColor: this.state.theme.main}, this.props.contentContainerStyle]}
                     onPress={this.props.onPress}>
                         <Text style={[styles.label, this.props.blue?{ color: this.state.theme.accent }:{ color: this.state.theme.main }]}>{this.props.label.toUpperCase()}</Text>
                     </TouchableOpacity>
@@ -53,9 +56,9 @@ export default class Button extends React.Component {
         } else {
             return (
                 <TouchableOpacity
-                style={[styles.container, { width: ((width*0.1027)*this.props.colSpan)+((width*0.055)*(this.props.colSpan-1)) }]}
+                style={[styles.container, { height: this._componentHeight, width: this._componentWidth }, this.props.contentContainerStyle]}
                 onPress={this.props.onPress}>
-                    <Text style={[styles.label, { color: this.props.labelColor }]}>{this.props.label}</Text>
+                    <Text style={[styles.label, { color: this.props.labelColor, letterSpacing:0 }]}>{this.props.label}</Text>
                 </TouchableOpacity>
             );
         }
