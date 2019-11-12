@@ -14,7 +14,7 @@ export default class Login extends React.Component {
             <View style={styles.container}>
                 <ColaeAPI.ColUI.Background />
                 <Text style={{fontSize: 30}}>Cadastro</Text>
-                <ColaeAPI.ColUI.Button blue colSpan={4} label='próximo' />
+                <ColaeAPI.ColUI.Button blue colSpan={4} label='próximo' onPress={()=>this.props.navigation.navigate('ForgotPassword')} />
             </View>
         );
     }

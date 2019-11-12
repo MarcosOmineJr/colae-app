@@ -1,6 +1,12 @@
+import React from 'react';
+
 import { createStackNavigator } from 'react-navigation-stack';
 
-import { OnboardingScreen, LoginScreen, SignUpScreen } from '../screens';
+import { InConstructionScreen, OnboardingScreen, LoginScreen, SignUpScreen } from '../screens';
+
+import ColaeAPI from '../api';
+
+const { ColUI } = ColaeAPI;
 
 const Unauthenticated = createStackNavigator({
     Onboarding: {
@@ -12,13 +18,28 @@ const Unauthenticated = createStackNavigator({
     Login: {
         screen: LoginScreen,
         navigationOptions: {
-            title: 'login'
+            title: 'login',
+            header: ({navigation})=>{
+                return <ColUI.Header noAuth navigation={navigation} title='login' />;
+            }
         }
     },
     SignUp:{
         screen: SignUpScreen,
         navigationOptions: {
-            title: 'Cadastro'
+            title: 'Cadastro',
+            header: ({navigation})=>{
+                return <ColUI.Header noAuth navigation={navigation} title='cadastro' />;
+            }
+        }
+    },
+    ForgotPassword:{
+        screen: InConstructionScreen,
+        navigationOptions:{
+            title:'Em Construção',
+            header: ({navigation})=>{
+                return <ColUI.Header noAuth navigation={navigation} title='Em Construção' />;
+            }
         }
     }
 },{

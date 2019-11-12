@@ -4,8 +4,13 @@ import {
     Text,
     Dimensions,
     StyleSheet,
-    Animated
+    Animated,
+    StatusBar
 } from 'react-native';
+import {
+    Header
+} from 'native-base';
+
 import { Svg, Defs, LinearGradient, Stop, Rect } from 'react-native-svg';
 
 import ColaeAPI from '../api';
@@ -18,28 +23,43 @@ export default class AuthCheck extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            onboardingData: ['Onboarding 1', 'Onboarding 2', 'Onboarding 3', 'Onboarding 4', 'Onboarding 5']
+            onboardingData: ['Onboarding 1', 'Onboarding 2', 'Onboarding 3', 'Onboarding 4', 'Onboarding 5'],
+            theme: ColaeAPI.ColUI.styles.lightTheme
         }
         this._renderItem = this._renderItem.bind(this);
+        this._getTheme = this._getTheme.bind(this);
     }
     
     _scrollX = new Animated.Value(0);
 
+    componentDidMount(){
+        this._getTheme;
+    }
+
     _renderItem(item, i){
         return (
             <View style={styles.itemContainerStyle} key={i}>
-                <Text style={{fontSize: 30}}>{item}</Text>
+                <Text style={{fontSize: 30, color: this.state.theme.accent}}>{item}</Text>
             </View>
         );
+    }
+
+    async _getTheme(){
+        let s = this.state;
+        s.theme = await ColaeAPI.ColUI.styles.getColorTheme();
+        this.setState(s);
     }
 
     render(){
         return (
             <View style={styles.container}>
+                <Header noShadow androidStatusBarColor={this.state.theme.background} style={{ backgroundColor:'transparent' }} />
+                <StatusBar barStyle='dark-content' />
                 <Animated.ScrollView
                 contentContainerStyle={styles.onboardingContainer}
                 pagingEnabled
                 horizontal
+                showsHorizontalScrollIndicator={false}
                 scrollEventThrottle={16}
                 onScroll={Animated.event([{nativeEvent: {contentOffset: {x: this._scrollX}}}],
                 {useNativeDriver: true})}

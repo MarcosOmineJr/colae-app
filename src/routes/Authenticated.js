@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import { HomeScreen } from '../screens';
+import { HomeScreen, InConstructionScreen } from '../screens';
 
 const Authenticated = createBottomTabNavigator({
     Home:{
