@@ -2,7 +2,9 @@ import React from 'react';
 
 import { createStackNavigator } from 'react-navigation-stack';
 
-import { InConstructionScreen, OnboardingScreen, LoginScreen, SignUpScreen } from '../screens';
+import { InConstructionScreen, OnboardingScreen, LoginScreen } from '../screens';
+
+import SignUp from './SignUp';
 
 import ColaeAPI from '../api';
 
@@ -25,12 +27,9 @@ const Unauthenticated = createStackNavigator({
         }
     },
     SignUp:{
-        screen: SignUpScreen,
-        navigationOptions: {
-            title: 'Cadastro',
-            header: ({navigation})=>{
-                return <ColUI.Header noAuth navigation={navigation} title='cadastro' />;
-            }
+        screen: SignUp,
+        navigationOptions:{
+            header: null
         }
     },
     ForgotPassword:{

@@ -7,6 +7,10 @@ import {
     Dimensions
 } from 'react-native';
 
+import {
+    Button
+} from 'native-base';
+
 import AsyncStorage from '@react-native-community/async-storage';
 
 import ColaeAPI from '../api';
@@ -29,12 +33,20 @@ export default class Login extends React.Component {
         return (
             <View style={styles.container}>
                 <ColaeAPI.ColUI.Background />
-                <ColaeAPI.ColUI.Card contentContainerStyle={styles.card}>
-                    <Text>Eae man, esse é o conteúdo do card</Text>
-                </ColaeAPI.ColUI.Card>
-                <ColaeAPI.ColUI.Button blue label='login' colSpan={4} onPress={()=>this._login()} />
-                <ColaeAPI.ColUI.Button textOnly label='Esqueceu a senha?' labelColor='#ffffff' contentContainerStyle={styles.passwordButton} onPress={()=>this.props.navigation.navigate('ForgotPassword')} />
-                <ColaeAPI.ColUI.Button textOnly label='Não tenho uma conta!' labelColor='#ffffff' onPress={()=>this.props.navigation.navigate('SignUp')} />
+                <View style={styles.cardContainer}>
+                    <ColaeAPI.ColUI.Card contentContainerStyle={styles.card}>
+                        <Text style={{color: ColaeAPI.ColUI.styles.lightTheme.accent, fontSize: 30}}>Login</Text>
+                    </ColaeAPI.ColUI.Card>
+                </View>
+                <View style={styles.btnContainer}>
+                    <ColaeAPI.ColUI.Button blue label='login' colSpan={4} onPress={()=>this._login()} />
+                    <Button transparent onPress={()=>this.props.navigation.navigate('ForgotPassword')} >
+                        <Text style={styles.btnLabel}>Esqueceu a senha?</Text>
+                    </Button>
+                    <Button transparent onPress={()=>this.props.navigation.navigate('SignUp')}>
+                        <Text style={styles.btnLabel}>Não tenho uma conta!</Text>
+                    </Button>
+                </View>
             </View>
         );
     }
@@ -46,11 +58,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-evenly'
     },
+    cardContainer:{
+        flex: 2,
+        width,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     card:{
         height: height*0.5144,
         marginBottom: 10
     },
-    passwordButton:{
-        marginBottom: -15
+    btnContainer:{
+        flex: 1,
+        width,
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+    },
+    btnLabel:{
+        color: '#ffffff'
     }
 });
