@@ -5,7 +5,8 @@ import {
     Dimensions,
     StyleSheet,
     Animated,
-    StatusBar
+    StatusBar,
+    Linking
 } from 'react-native';
 import {
     Header
@@ -39,7 +40,7 @@ export default class AuthCheck extends React.Component {
     _renderItem(item, i){
         return (
             <View style={styles.itemContainerStyle} key={i}>
-                <Text style={{fontSize: 30, color: this.state.theme.accent}}>{item}</Text>
+                <Text style={{fontSize: 30, color: this.state.theme.accent}} onPress={()=>{Linking.openURL('https://google.com.br')}}>{item}</Text>
             </View>
         );
     }

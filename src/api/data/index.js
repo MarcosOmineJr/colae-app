@@ -1,3 +1,5 @@
-import headphones from './aiaiai';
+//imports:
+import headphones from './headphones';
+import s from './Store';
 
-export default { headphones };
+export const Store = s;
