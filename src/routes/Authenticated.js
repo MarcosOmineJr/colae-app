@@ -1,40 +1,62 @@
+import React from 'react';
+
+import { Icon } from 'native-base';
+
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import { HomeScreen, InConstructionScreen } from '../screens';
+import HomeStack from './HomeStack';
+import ExploreStack from './ExploreStack';
+import ChatsStack from './ChatsStack';
+import ShoppingStack from './ShoppingStack';
+import MyProfileStack from './MyProfileStack';
+
+import ColaeAPI from '../api';
+
+const { ColUI } = ColaeAPI;
 
 const Authenticated = createBottomTabNavigator({
     Home:{
-        screen: HomeScreen,
+        screen: HomeStack,
         navigationOptions:{
-            tabBarLabel: 'Para Mim'
+            tabBarLabel: 'Meus Eventos',
+            tabBarIcon: ({focused})=>{return <Icon type="MaterialIcons" name="assignment" style={focused?{color: '#ffffff'}:{color:'rgba(255,255,255,0.7)'}} />}
         }
     },
-    Search:{
-        screen: InConstructionScreen,
+    Explore:{
+        screen: ExploreStack,
         navigationOptions:{
-            tabBarLabel: 'Pesquisa'
+            tabBarLabel: 'Explorar',
+            tabBarIcon: ({focused})=>{return <Icon type="MaterialIcons" name="search" style={focused?{color: '#ffffff'}:{color:'rgba(255,255,255,0.7)'}} />}
         }
     },
     Chat:{
-        screen: InConstructionScreen,
+        screen: ChatsStack,
         navigationOptions:{
-            tabBarLabel: 'Conversas'
+            tabBarLabel: 'Conversas',
+            tabBarIcon: ({focused})=>{return <Icon type="MaterialIcons" name="message" style={focused?{color: '#ffffff'}:{color:'rgba(255,255,255,0.7)'}} />}
         }
     },
     Shopping:{
-        screen: InConstructionScreen,
+        screen: ShoppingStack,
         navigationOptions:{
-            tabBarLabel: 'Compras'
+            tabBarLabel: 'Compras',
+            tabBarIcon: ({focused})=>{return <Icon type="MaterialIcons" name="shopping-cart" style={focused?{color: '#ffffff'}:{color:'rgba(255,255,255,0.7)'}} />}
         }
     },
     Profile:{
-        screen: InConstructionScreen,
+        screen: MyProfileStack,
         navigationOptions:{
-            tabBarLabel: 'Meu Perfil'
+            tabBarLabel: 'Meu Perfil',
+            tabBarIcon: ({focused})=>{return <Icon type="MaterialIcons" name="account-circle" style={focused?{color: '#ffffff'}:{color:'rgba(255,255,255,0.7)'}} />}
         }
     }
 },{
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+    tabBarComponent: (props) => (
+        <ColUI.BottomTabNavigator {...props} />
+    )
 });
+
+
 
 export default Authenticated;
