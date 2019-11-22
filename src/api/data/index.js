@@ -1,5 +1,5 @@
 //imports:
 import headphones from './headphones';
-import s from './Store';
+import { store, persistor } from './Store';
 
-export const Store = s;
+export { store, persistor };
